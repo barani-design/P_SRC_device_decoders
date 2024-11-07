@@ -92,5 +92,6 @@ class parser:
 
 if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
     print("MeteoAltim parser example code")
-    d = parser(str(sys.argv[1]),int(sys.argv[2]))
+    bytesToDecode = 16
+    d = parser(str(sys.argv[1]), bytesToDecode)
     d.parsePayload(1)
