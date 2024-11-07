@@ -2,6 +2,7 @@
 Decoders for IoT devices
 
 How to parse with Python parser in CMD line (Power Shell/CMD)
+
 ###############################
 1. Download files from git.
 2. Go to downloaded file location and pick folder with parser what you want.
