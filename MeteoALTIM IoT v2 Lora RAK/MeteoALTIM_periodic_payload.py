@@ -80,7 +80,7 @@ class parser:
                 print("Press_"+ str(i) +": "+ str(self.press[i]) + "Pa")
 
             if self.dbg == 1:
-                print("DBG: Pressure sensor error!", self.dbg)
+                print("DBG: Pressure sensor error!")
             else:
                 print("DBG: No error")
 
