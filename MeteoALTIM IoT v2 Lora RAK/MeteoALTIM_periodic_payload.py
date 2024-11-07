@@ -2,7 +2,7 @@
 ## data budu pekne v poradi ako su v exceli, float na 4 desatinne,
 ## zarovnane tabelatormi..              #Seva kamo, bardzo fajny skrypt sa nakodzi
 
-class decoder:
+class parser:
     base = 16                                      #hexa base
 
     indexStart = 0                                 #starting position in payload
@@ -77,5 +77,5 @@ class decoder:
 
 
 
-d = decoder("06CB52448C62443123D8922C48EA161A",16)
+d = parser("06CB52448C62443123D8922C48EA161A",16)
 d.parsePayload(1)
