@@ -17,12 +17,12 @@ class parser:
     tempRes    = 0.01                                                                                                   # if resolution is different than 1
     tempOffset = -50                                                                                                    # temp offset because this is minimal value
 
-    tempMinStart  = 23
-    tempLen    = 8
+    tempMinStart = 23
+    tempMinLen   = 8
     tempMinRes   = 0.05
 
-    tempMaxStart  = 31
-    tempLen    = 8
+    tempMaxStart = 31
+    tempMaxLen   = 8
     tempMaxRes   = 0.05
 
     humStart   = 39
@@ -32,6 +32,7 @@ class parser:
     pressBaseStart = 48                                                                                                 # starting position for pressures
     pressNum   = 1                                                                                                      # numbers of pressure sensor's
     pressLen   = 15
+    pressRes   = 2.5
     pressOffset = 30000
 
     irraStart   = 63
@@ -91,6 +92,20 @@ class parser:
         self.index = int(''.join(self.binStringList[self.indexStart : self.indexStart + self.indexLen]),2)
         self.battState = int(''.join(self.binStringList[self.battStart : self.battStart + self.battLen]),2)
         self.batt = ((self.index % 5) * self.battRes) + self.battOffset
+        self.temp = (int(''.join(self.binStringList[self.tempStart: self.tempStart + self.tempLen]),2) * self.tempRes) + self.tempOffset
+        self.tempMin = (int(''.join(self.binStringList[self.tempMinStart: self.tempMinStart + self.tempMinLen]),2) * self.tempMinRes)
+        self.tempMax = (int(''.join(self.binStringList[self.tempMaxStart: self.tempMaxStart + self.tempMaxLen]),2) * self.tempMaxRes)
+        self.hum = (int(''.join(self.binStringList[self.humStart: self.humStart + self.humLen]), 2) * self.humRes)
+
+        for i in range(self.pressNum):
+            self.press[i] = (int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2) + self.pressOffset) * self.pressRes)
+
+        self.irra = (int(''.join(self.binStringList[self.irraStart: self.irraStart + self.irraLen]), 2) * self.irraRes)
+        self.irraMin = (int(''.join(self.binStringList[self.irraMinStart: self.irraMinStart + self.irraMinLen]), 2) * self.irraMinRes)
+        self.irraMax = (int(''.join(self.binStringList[self.irraMaxStart: self.irraMaxStart + self.irraMaxLen]), 2) * self.irraMaxRes)
+        self.rainClicks = (int(''.join(self.binStringList[self.rainClicksStart: self.rainClicksStart + self.rainClicksLen]), 2) * self.rainClicksRes)
+
+
         self.temp = (int(''.join(self.binStringList[self.tempStart: self.tempStart + self.tempLen]), 2) * self.tempRes) + self.tempOffset
         self.hum = int(''.join(self.binStringList[self.humStart : self.humStart + self.humLen]),2)
         self.dbg = int(''.join(self.binStringList[self.dbgStart: self.dbgStart + self.dbgLen]), 2)
