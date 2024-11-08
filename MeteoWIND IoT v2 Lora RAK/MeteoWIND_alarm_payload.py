@@ -74,11 +74,11 @@ class parser:
 ##### EXAMPLE CODE #####
 
 print("MeteoWind Alarm parser example code")                                                                               # uncomment if you want to run it from IDE
-d = parser("18FA10E9B39180",6)
+d = parser("18FA10E9B39180",7)
 d.parsePayload(1)
 
 # if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
 #     print("MeteoWind Alarm parser example code")
-#     bytesToDecode = 6
+#     bytesToDecode = 7
 #     d = parser(str(sys.argv[1]), bytesToDecode)
 #     d.parsePayload(1)
