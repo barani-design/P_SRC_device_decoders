@@ -101,26 +101,27 @@ class parser:
         self.battState = int(''.join(self.binStringList[self.battStart : self.battStart + self.battLen]),2)
         self.batt = ((self.index % 5) * self.battRes) + self.battOffset
         self.temp = (int(''.join(self.binStringList[self.tempStart: self.tempStart + self.tempLen]),2) * self.tempRes) + self.tempOffset
-        self.tempMin = (int(''.join(self.binStringList[self.tempMinStart: self.tempMinStart + self.tempMinLen]),2) * self.tempMinRes)
-        self.tempMax = (int(''.join(self.binStringList[self.tempMaxStart: self.tempMaxStart + self.tempMaxLen]),2) * self.tempMaxRes)
+        self.tempMin = self.temp - (int(''.join(self.binStringList[self.tempMinStart: self.tempMinStart + self.tempMinLen]),2) * self.tempMinRes)
+        self.tempMax = self.temp + (int(''.join(self.binStringList[self.tempMaxStart: self.tempMaxStart + self.tempMaxLen]),2) * self.tempMaxRes)
         self.hum = (int(''.join(self.binStringList[self.humStart: self.humStart + self.humLen]), 2) * self.humRes)
 
         for i in range(self.pressNum):
-            self.press[i] = (int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2) + self.pressOffset) * self.pressRes)
+            self.press[i] = (int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2)) * self.pressRes) + self.pressOffset
 
         self.irra = (int(''.join(self.binStringList[self.irraStart: self.irraStart + self.irraLen]), 2) * self.irraRes)
-        self.irraMin = (int(''.join(self.binStringList[self.irraMinStart: self.irraMinStart + self.irraMinLen]), 2) * self.irraMinRes)
-        self.irraMax = (int(''.join(self.binStringList[self.irraMaxStart: self.irraMaxStart + self.irraMaxLen]), 2) * self.irraMaxRes)
+        self.irraMin = self.irra - (int(''.join(self.binStringList[self.irraMinStart: self.irraMinStart + self.irraMinLen]), 2) * self.irraMinRes)
+        self.irraMax = self.irra + (int(''.join(self.binStringList[self.irraMaxStart: self.irraMaxStart + self.irraMaxLen]), 2) * self.irraMaxRes)
         self.rainClicks = (int(''.join(self.binStringList[self.rainClicksStart: self.rainClicksStart + self.rainClicksLen]), 2) * self.rainClicksRes)
 
         self.rainInterval = (int(''.join(self.binStringList[self.rainIntervalStart: self.rainIntervalStart + self.rainIntervalLen]), 2) * self.rainIntervalRes)
-        self.rainInterval = (728/self.rainInterval)*(728/self.rainInterval)
+        if self.rainInterval != 0:
+            self.rainInterval = (728/self.rainInterval)*(728/self.rainInterval)
 
         self.rainCorrection = (int(''.join(self.binStringList[self.rainCorrectionStart: self.rainCorrectionStart + self.rainCorrectionLen]), 2) * self.rainCorrectionRes)
         self.dbg = int(''.join(self.binStringList[self.dbgStart: self.dbgStart + self.dbgLen]), 2)
 
-        for i in range(self.pressNum):
-            self.press[i] = int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2) + self.pressOffset)
+        # for i in range(self.pressNum):
+        #     self.press[i] = int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2) + self.pressOffset)
 
         if enablePrint == 1:
             print("Index: " + str(self.index))
@@ -142,9 +143,9 @@ class parser:
             print("Irradiation MIN: " + str(format(self.irraMin, '.4f')) + "W/m2")
             print("Irradiation MAX: " + str(format(self.irraMax, '.4f')) + "W/m2")
 
-            print("Rain clicks: " + str(format(self.rainClicks, '.4f')))
-            print("Rain interval: " + str(format(self.rainInterval, '.5f')) + "s")
-            print("Rain corrcetion: " + str(format(self.rainCorrection, '.4f')))
+            print("Rain clicks: " + str(format(self.rainClicks, '.0f')))
+            print("Rain interval: " + str(format(self.rainInterval, '.3f')) + "s")
+            print("Rain corrcetion: " + str(format(self.rainCorrection, '.2f')))
 
             if self.dbg == 1:
                 print("DBG: Pressure sensor error!")
@@ -154,7 +155,7 @@ class parser:
 ##### EXAMPLE CODE #####
 
 # print("MeteoAltim parser example code")                                                                               # uncomment if you want to run it from IDE
-# d = parser("your payload to decode",16)
+# d = parser("93b44e0a06e6dd00020010040B0B0A00",16)
 # d.parsePayload(1)
 
 if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
