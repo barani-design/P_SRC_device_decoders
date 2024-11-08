@@ -60,9 +60,17 @@ class parser:
     rainCorrectionRes     = 0.01
 
     dbgStart   = 126
-    dbgLen     = 1
+    dbgLen     = 2
 
     def __init__(self, inputString, numOfBytes):                                                                        # internal storage for parsed variables
+        self.rainCorrection = None
+        self.rainInterval = None
+        self.rainClicks = None
+        self.irraMax = None
+        self.irraMin = None
+        self.tempMax = None
+        self.tempMin = None
+        self.irra = None
         self.battState = None
         self.batt = None
         self.dbg = None
@@ -105,9 +113,10 @@ class parser:
         self.irraMax = (int(''.join(self.binStringList[self.irraMaxStart: self.irraMaxStart + self.irraMaxLen]), 2) * self.irraMaxRes)
         self.rainClicks = (int(''.join(self.binStringList[self.rainClicksStart: self.rainClicksStart + self.rainClicksLen]), 2) * self.rainClicksRes)
 
+        self.rainInterval = (int(''.join(self.binStringList[self.rainIntervalStart: self.rainIntervalStart + self.rainIntervalLen]), 2) * self.rainIntervalRes)
+        self.rainInterval = (728/self.rainInterval)*(728/self.rainInterval)
 
-        self.temp = (int(''.join(self.binStringList[self.tempStart: self.tempStart + self.tempLen]), 2) * self.tempRes) + self.tempOffset
-        self.hum = int(''.join(self.binStringList[self.humStart : self.humStart + self.humLen]),2)
+        self.rainCorrection = (int(''.join(self.binStringList[self.rainCorrectionStart: self.rainCorrectionStart + self.rainCorrectionLen]), 2) * self.rainCorrectionRes)
         self.dbg = int(''.join(self.binStringList[self.dbgStart: self.dbgStart + self.dbgLen]), 2)
 
         for i in range(self.pressNum):
@@ -121,11 +130,21 @@ class parser:
             else:
                 print("Batt: <" + str(format(self.batt, '.4f')) + "V")
 
-            print("Temp: " + str(self.temp) + "C")
-            print("Hum: " + str(self.hum) + "%")
+            print("Temp: " + str(format(self.temp, '.4f')) + "C")
+            print("Temp MIN: " + str(format(self.tempMin, '.4f')) + "C")
+            print("Temp MAX: " + str(format(self.tempMax, '.4f')) + "C")
+            print("Hum: " + str(format(self.hum, '.4f')) + "%")
 
             for i in range(self.pressNum):
-                print("Press_"+ str(i) +": "+ str(self.press[i]) + "Pa")
+                print("Press_"+ str(i) +": "+ str(format(self.press[i], '.4f')) + "Pa")
+
+            print("Irradiation: " + str(format(self.irra, '.4f')) + "W/m2")
+            print("Irradiation MIN: " + str(format(self.irraMin, '.4f')) + "W/m2")
+            print("Irradiation MAX: " + str(format(self.irraMax, '.4f')) + "W/m2")
+
+            print("Rain clicks: " + str(format(self.rainClicks, '.4f')))
+            print("Rain interval: " + str(format(self.rainInterval, '.5f')) + "s")
+            print("Rain corrcetion: " + str(format(self.rainCorrection, '.4f')))
 
             if self.dbg == 1:
                 print("DBG: Pressure sensor error!")
