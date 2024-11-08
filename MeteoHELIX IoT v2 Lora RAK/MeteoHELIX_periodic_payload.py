@@ -1,4 +1,4 @@
-#Meteo Altim parser ver.***
+#Meteo Helix parser ver.***
 import sys
 
 class parser:
@@ -154,12 +154,12 @@ class parser:
 
 ##### EXAMPLE CODE #####
 
-# print("MeteoAltim parser example code")                                                                               # uncomment if you want to run it from IDE
+# print("MeteoHelix parser example code")                                                                               # uncomment if you want to run it from IDE
 # d = parser("93b44e0a06e6dd00020010040B0B0A00",16)
 # d.parsePayload(1)
 
 if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-    print("MeteoAltim parser example code")
+    print("MeteoHelix parser example code")
     bytesToDecode = 16
     d = parser(str(sys.argv[1]), bytesToDecode)
     d.parsePayload(1)
