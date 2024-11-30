@@ -1,0 +1,8 @@
+Choice 2:
+
+Use online python: https://www.online-python.com/
+
+1. Copy and paste code to main.py window,
+2. copy and paste PAYLOAD in to Command Line Argument
+3. run the script
+4. see output
