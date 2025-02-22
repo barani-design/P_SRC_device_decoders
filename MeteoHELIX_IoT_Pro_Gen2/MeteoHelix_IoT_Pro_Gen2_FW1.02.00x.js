@@ -48,7 +48,7 @@ function decodeUplink(input) {
         return Math.round(number * factor) / factor;
     }
     
-   function batteryIndicator(index, battery_bit, min_value=3.3) {
+    function batteryIndicator(index, battery_bit, min_value=3.3) {
         var remainder = index % 5;
         
         if ( remainder > 4)
@@ -63,7 +63,7 @@ function decodeUplink(input) {
           return battery_bit === 1 ? `> ${rounded} V` : `< ${rounded} V`;
         }
         
-    }  
+    }    
 
     bindata = data2bits(bytes);
 
@@ -73,12 +73,16 @@ function decodeUplink(input) {
     var battery = batteryIndicator(index, battery_bit);
 
     var temp_avg = precisionRound(bitShift(14)*0.01, 2);
+    tem_avg = Math.round(temp_avg * 10) / 10;
 
     var temp_min_diff = precisionRound(bitShift(8)*0.05, 2);
     var temp_max_diff = precisionRound(bitShift(8)*0.05, 2);
     
     var temp_min = temp_avg - temp_min_diff
     var temp_max = temp_avg + temp_min_diff
+    
+    temp_min = Math.round(temp_min * 10) / 10;
+    temp_max = Math.round(temp_max * 10) / 10;
     
     var humidity = precisionRound(bitShift(9)*0.2, 2);
     var pressure = precisionRound(bitShift(15)*2.5, 2);
@@ -120,8 +124,8 @@ function decodeUplink(input) {
         "irr_min": irr_min,
         "irr_max": irr_max,
         "rain_clicks": rain_clicks,
-	"time_interval": time_interval,
-	"rain_intens": rain_intens,
+	       "time_interval": time_interval,
+	       "rain_intens": rain_intens,
         "alarm_dbg": alarm_dbg,
     };
 
