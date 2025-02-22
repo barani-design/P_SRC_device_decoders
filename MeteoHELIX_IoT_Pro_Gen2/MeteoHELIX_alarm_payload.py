@@ -1,4 +1,4 @@
-#Meteo Helix Alarm parser ver.***
+#Meteo Helix Alarm decoder ver.***
 import sys
 
 class parser:
@@ -108,12 +108,12 @@ class parser:
 
 ##### EXAMPLE CODE #####
 
-# print("MeteoHelix Alarm parser example code")                                                                               # uncomment if you want to run it from IDE
+# print("MeteoHelix Alarm decoder example code")                                                                               # uncomment if you want to run it from IDE
 # d = parser("00D098CB914040008360",10)
 # d.parsePayload(1)
 
 if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-    print("MeteoHelix Alarm parser example code")
+    print("MeteoHelix Alarm decoder example code")
     bytesToDecode = 10
     d = parser(str(sys.argv[1]), bytesToDecode)
     d.parsePayload(1)

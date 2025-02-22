@@ -1,4 +1,4 @@
-#Meteo Rain Alarm parser ver.***
+#Meteo Rain Alarm decoder ver.***
 import sys
 
 class parser:
@@ -60,12 +60,12 @@ class parser:
 
 ##### EXAMPLE CODE #####
 
-print("MeteoRain Alarm parser example code")                                                                               # uncomment if you want to run it from IDE
+print("MeteoRain Alarm decoder example code")                                                                               # uncomment if you want to run it from IDE
 d = parser("0A013240",4)
 d.parsePayload(1)
 
 # if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-#     print("MeteoRain Alarm parser example code")
+#     print("MeteoRain Alarm decoder example code")
 #     bytesToDecode = 4
 #     d = parser(str(sys.argv[1]), bytesToDecode)
 #     d.parsePayload(1)

@@ -1,4 +1,4 @@
-#Meteo Altim parser ver.***
+#Meteo Altim decoder ver.***
 import sys
 
 class parser:
@@ -86,7 +86,7 @@ class parser:
 
 ##### EXAMPLE CODE #####
 
-# print("MeteoAltim parser example code")                                                                               # uncomment if you want to run it from IDE
+# print("MeteoAltim decoder example code")                                                                               # uncomment if you want to run it from IDE
 # d = parser("your payload to decode",16)
 # d.parsePayload(1)
 

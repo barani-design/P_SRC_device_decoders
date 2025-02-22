@@ -1,6 +1,6 @@
 Decoders for IoT devices
 
-How to parse with Python parser in CMD line (Power Shell/CMD)
+How to decode with Python decoder in CMD line (Power Shell/CMD)
 
 ###############################
 
