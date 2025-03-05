@@ -73,6 +73,7 @@ function decodeUplink(input) {
     var battery = batteryIndicator(index, battery_bit);
 
     var temp_avg = precisionRound(bitShift(14)*0.01, 2);
+    temp_avg = temp_avg + (-50);
     tem_avg = Math.round(temp_avg * 10) / 10;
 
     var temp_min_diff = precisionRound(bitShift(8)*0.05, 2);
@@ -86,6 +87,8 @@ function decodeUplink(input) {
     
     var humidity = precisionRound(bitShift(9)*0.2, 2);
     var pressure = precisionRound(bitShift(15)*2.5, 2);
+    
+    pressure = pressure + 30000;
     
     var irradiation = precisionRound(bitShift(11)*1, 2);
     var irr_min_diff = precisionRound(bitShift(10)*2, 2);
@@ -120,12 +123,13 @@ function decodeUplink(input) {
         "temp_min": temp_min,
         "temp_max": temp_max,
         "humidity": humidity,
+        "pressure" : pressure,
         "irradiation": irradiation,
         "irr_min": irr_min,
         "irr_max": irr_max,
         "rain_clicks": rain_clicks,
-	       "time_interval": time_interval,
-	       "rain_intens": rain_intens,
+	      "time_interval": time_interval,
+	      "rain_intens": rain_intens,
         "alarm_dbg": alarm_dbg,
     };
 
