@@ -1,3 +1,4 @@
+//MeteoRain IoT Pro Gen2 peridoc payload decoder
 function decodeUplink(input) {
     var bytes = input.bytes;
 

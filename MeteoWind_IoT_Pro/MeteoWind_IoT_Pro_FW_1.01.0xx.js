@@ -1,3 +1,4 @@
+//MeteoWind IoT Pro periodic paylod decoder
 function decodeUplink(input) {
     var bytes = input.bytes;
 

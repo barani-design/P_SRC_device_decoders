@@ -1,3 +1,4 @@
+//MeteoWind_IoT_Pro_Gen2 periodic payload decoder
 function decodeUplink(input) {
     var bytes = input.bytes;
 
