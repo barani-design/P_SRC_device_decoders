@@ -54,7 +54,7 @@ function decodeUplink(input) {
 
     var typ_e = precisionRound(bitShift(2), 1);
 
-    var batt = bitShift(5);
+    var batt = precisionRound(bitShift(5)*0.05, 2);
     var battery = precisionRound(batt + 3, 2); //3V is minimum value
 
     var temp = precisionRound(bitShift(11)*0.1, 2);
