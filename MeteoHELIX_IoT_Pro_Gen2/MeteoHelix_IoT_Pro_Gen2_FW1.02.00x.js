@@ -1,3 +1,4 @@
+//MeteoHelix IoT Pro Gen2 Periodic payload decoder
 function decodeUplink(input) {
     var bytes = input.bytes;
 
@@ -130,8 +131,8 @@ function decodeUplink(input) {
         "irr_min": irr_min,
         "irr_max": irr_max,
         "rain_clicks": rain_clicks,
-	      "time_interval": time_interval,
-	      "rain_intens": rain_intens,
+	"time_interval": time_interval,
+	"rain_intens": rain_intens,
         "alarm_dbg": alarm_dbg,
     };
 
