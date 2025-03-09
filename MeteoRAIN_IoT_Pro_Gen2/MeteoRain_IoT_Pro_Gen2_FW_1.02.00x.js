@@ -89,7 +89,7 @@ function decodeUplink(input) {
         "battery_indicator": battery,
         "rain_clicks": rain_clicks,
         "time_btwn": time_bt,
-        "rain_intensity": rain_intensity,
+        "rain_intensity_correction": rain_intensity,
         "temp above 2 deg": temp,
         "debug": debug,
     };
