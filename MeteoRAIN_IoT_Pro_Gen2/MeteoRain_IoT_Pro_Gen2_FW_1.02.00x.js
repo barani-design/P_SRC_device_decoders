@@ -84,6 +84,7 @@ function decodeUplink(input) {
 
 
     var decoded = {
+	"00A_device" : "MeteoRain IoT Pro Gen2",
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,

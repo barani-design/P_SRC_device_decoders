@@ -98,6 +98,7 @@ function decodeUplink(input) {
     var alarm_sent = precisionRound(bitShift(1)*1, 1);
 
     var decoded = {
+	"00A_device" : "MeteoWind IoT Pro",
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,
