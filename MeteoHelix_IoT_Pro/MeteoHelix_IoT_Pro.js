@@ -64,7 +64,7 @@ function decodeUplink(input) {
     var t_min = precisionRound( temperature - t_mi, 2);
     
     var t_ma = precisionRound(bitShift(6)*0.1, 2);
-    var t_max = precisionRound( temperature - t_mi, 2);
+    var t_max = precisionRound( temperature + t_ma, 2);
     var humidity = precisionRound(bitShift(9)*0.2, 2);
     
     var press = precisionRound(bitShift(14)*5, 2);
