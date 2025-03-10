@@ -60,22 +60,24 @@ function decodeUplink(input) {
     var temp = precisionRound(bitShift(11)*0.1, 2);
     var temperature = precisionRound(temp + (-100), 2); //-100 is minimum value
     
-    var t_min = precisionRound(bitShift(6)*0.1, 2);
-    var t_max = precisionRound(bitShift(6)*0.1, 2);
+    var t_mi = precisionRound(bitShift(6)*0.1, 2);
+    var t_min = precisionRound( temperature - t_mi, 2);
     
+    var t_ma = precisionRound(bitShift(6)*0.1, 2);
+    var t_max = precisionRound( temperature - t_mi, 2);
     var humidity = precisionRound(bitShift(9)*0.2, 2);
     
     var press = precisionRound(bitShift(14)*5, 2);
     var pressure = precisionRound(press + 50000, 2);
     
     var irradiation = precisionRound(bitShift(10)*2, 2);
-    var irr_max = precisionRound(bitShift(9)*2, 2);
+    var irr_ma = precisionRound(bitShift(9)*2, 2);
+    var irr_max = precisionRound( irr_ma + irradiation, 2);
+    
     var rain = precisionRound(bitShift(8)*1, 2);
 
 
-
     var decoded = {
-	"00A_device" : "MeteoHelix IoT Pro",
         "msg_type": typ_e,
         "battery": battery,
         "temperature": temperature,
