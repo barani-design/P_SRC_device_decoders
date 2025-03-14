@@ -98,6 +98,7 @@ function decodeUplink(input) {
     var alarm_sent = precisionRound(bitShift(1)*1, 1);
 
     var decoded = {
+	"00A_device" : "MeteoWind IoT Pro Gen2",
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,
@@ -109,8 +110,8 @@ function decodeUplink(input) {
         "dir_ave": deg_1s_avg,
         "dir_1s_gust": deg_1s_gust,
         "dir_1s_stdev": deg_1s_stdev,
-	       "dir_ccw_min": deg_ccw_min,
-	       "dir_ccw_max": deg_ccw_max,
+	"dir_ccw_min": deg_ccw_min,
+	"dir_ccw_max": deg_ccw_max,
         "gust_time": gust_time,
         "alarm_sent": alarm_sent,
     };
