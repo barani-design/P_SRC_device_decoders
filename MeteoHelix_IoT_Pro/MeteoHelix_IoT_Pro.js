@@ -78,6 +78,7 @@ function decodeUplink(input) {
 
 
     var decoded = {
+        "00A_device" : "MeteoHelix IoT Pro",
         "msg_type": typ_e,
         "battery": battery,
         "temperature": temperature,
