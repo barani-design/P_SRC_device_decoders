@@ -52,22 +52,13 @@ function decodeUplink(input) {
         return Math.round(number * factor) / factor;
     }
     
-   function batteryIndicator(index, battery_bit, min_value=3.3) {
-        var remainder = index % 5;
+    function batteryIndicator(index, battery_bit, min_value=3.3) {
+        var remainder = index % 10;
+        var result = remainder < 5 ? remainder * 0.2 + min_value : remainder * 0.2 + min_value - 1;
         
-        if ( remainder > 4)
-        {
-          return 0;
-        }
-        
-        else
-        {
-          var result = remainder < 4 ? remainder * 0.2 + min_value : remainder * 0.2 + min_value - 1;
-          var rounded = Math.round(result * 10) / 10;
-          return battery_bit === 1 ? `> ${rounded} V` : `< ${rounded} V`;
-        }
-        
-    }   
+        var rounded = Math.round(result * 10) / 10;
+        return battery_bit === 1 ? `== ${rounded} V` : `!= ${rounded} V`;
+    }    
 
     bindata = data2bits(bytes);
 
@@ -101,7 +92,6 @@ function decodeUplink(input) {
     var alarm_sent = precisionRound(bitShift(1)*1, 1);
 
     var decoded = {
-	"00A_device" : "MeteoWind IoT Pro Gen2",
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,
@@ -113,8 +103,8 @@ function decodeUplink(input) {
         "dir_ave": deg_1s_avg,
         "dir_1s_gust": deg_1s_gust,
         "dir_1s_stdev": deg_1s_stdev,
-	"dir_ccw_min": deg_ccw_min,
-	"dir_ccw_max": deg_ccw_max,
+	       "dir_ccw_min": deg_ccw_min,
+	       "dir_ccw_max": deg_ccw_max,
         "gust_time": gust_time,
         "alarm_sent": alarm_sent,
     };
@@ -123,3 +113,4 @@ function decodeUplink(input) {
         data: decoded
     };
 }
+
