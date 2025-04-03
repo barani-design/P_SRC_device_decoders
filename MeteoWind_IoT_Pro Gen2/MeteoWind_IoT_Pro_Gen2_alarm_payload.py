@@ -5,26 +5,26 @@ class parser:
     base = 16                                                                                                           #hexa base
 
     indexStart = 0                                                                                                      #starting position in payload
-    indexLen   = 6                                                                                                      #length of variable in bits
+    indexLen   = 5                                                                                                      #length of variable in bits
 
-    hz3sGustStart = 6
+    hz3sGustStart = 5
     hz3sGustLen   = 11
     hz3sGustRes   = 0.1
 
-    hz1sGustStart = 17
+    hz1sGustStart = 16
     hz1sGustLen   = 8
     hz1sGustRes   = 0.1
 
-    deg1sGustStart = 25
+    deg1sGustStart = 24
     deg1sGustLen   = 9
     deg1sGustRes   = 1
 
-    time1sGustStart = 34
+    time1sGustStart = 33
     time1sGustLen   = 7
     time1sGustRes   = 5
 
-    dbgStart   = 41
-    dbgLen     = 7
+    dbgStart   = 40
+    dbgLen     = 8
 
     def __init__(self, inputString, numOfBytes):                                                                        # internal storage for parsed variables
         self.hz3sGust = None
@@ -61,10 +61,10 @@ class parser:
 
         if enablePrint == 1:
             print("Index: " + str(self.index))
-            print("Hz_3s_gust: " + str(format(self.hz3sGust, '.4f')) + "Hz")
-            print("Hz_1s_gust: " + str(format(self.hz1sGust, '.1f')) + "Hz")
-            print("Deg_1s_gust: " + str(format(self.deg1sGust, '.1f')) + "Deg")
-            print("Time_1s_gust: " + str(format(self.time1sGust, '.1f')) + "s")
+            print("Hz_3s_gust: " + str(format(self.hz3sGust, '.4f')) + " Hz")
+            print("Hz_1s_gust: " + str(format(self.hz1sGust, '.1f')) + " Hz")
+            print("Deg_1s_gust: " + str(format(self.deg1sGust, '.1f')) + " Deg")
+            print("Time_1s_gust: " + str(format(self.time1sGust, '.1f')) + " s")
 
             if self.dbg == 1:
                 print("DBG:", self.dbg)
@@ -74,7 +74,7 @@ class parser:
 ##### EXAMPLE CODE #####
 
 print("MeteoWind Alarm parser example code")                                                                               # uncomment if you want to run it from IDE
-d = parser("18FA10E9B391",6)
+d = parser("084D034D9800",6)
 d.parsePayload(1)
 
 # if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
