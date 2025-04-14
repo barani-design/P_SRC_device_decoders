@@ -37,8 +37,8 @@ class creator:
         self.snoozeTime = list(str(bin(int(str(int(self.snoozeTime/120))))[2:].zfill(self.bitLenTime)))
 
         self.tempUpperLower = list(str(bin(int(str(int(self.tempUpperLower))))[2:].zfill(self.bitLenUL)))               #
-        self.lowTemp = list(str(bin(int(str(int(((self.lowTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))                 #
-        self.upTemp =  list(str(bin(int(str(int(((self.upTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))                #
+        self.lowTemp = list(str(bin(int(str(int(((self.lowTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))                #
+        self.upTemp =  list(str(bin(int(str(int(((self.upTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))                 #
 
         self.humUpperLower = list(str(bin(int(str(int(self.humUpperLower))))[2:].zfill(self.bitLenUL)))                 #
         self.upHum = list(str(bin(int(str(int(self.upHum))))[2:].zfill(self.bitLenHum)))                                #
@@ -63,7 +63,11 @@ class creator:
 # d = creator(3, 120,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 298, 256)
 # d.createAlarm(1)
 
-if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
+
+# alarmType(0-3) snoozeTime in sec(0-61440 multiply of 120) tempUpperLower(0-3) lowTemp(-50-50) upTemp(-50-50) humUpperLower(0-3) lowHum(0-100) upHum(0-100) pressUpperLower(0-3) lowPress(0-108300) upPress(0-108300) minInterval(0-1023) debug(0-512)
+
+#python MeteoHelix_IoT_Pro_Gen2_alarm_creator.py 3 120 0 -16.4 2.8 3 66 85 1 57300 84610 298 256
+if __name__ == "__main__":                                                                                                    # uncomment if you want to run it from CMD line
     print("MeteoWind Alarm creator example code")
     d = creator(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]), float(sys.argv[5]), int(sys.argv[6]), int(sys.argv[7]), int(sys.argv[8]), int(sys.argv[9]), int(sys.argv[10]), int(sys.argv[11]), int(sys.argv[12]), int(sys.argv[13]))
     d.createAlarm(1)
