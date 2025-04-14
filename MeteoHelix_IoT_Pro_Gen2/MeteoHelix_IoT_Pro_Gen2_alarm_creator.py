@@ -52,22 +52,23 @@ class creator:
         self.debug = list(str(bin(int(str(int(self.debug))))[2:].zfill(self.bitLenDebug)))
 
         self.alarmString = self.alarmType + self.snoozeTime + self.tempUpperLower + self.lowTemp + self.upTemp + self.humUpperLower + self.lowHum + self.upHum + self.pressUpperLower + self.lowPress + self.upPress + self.minInterval + self.debug
-        self.alarmString = hex(int(''.join(self.alarmString),2))[2:].zfill(9)
+        self.alarmString = hex(int(''.join(self.alarmString),2))
 
         if enablePrint == 1:
-            print("Alarm payload: ",self.alarmString)
+            value = int(self.alarmString.replace("0x", ""), 16)
+            print(f"Alarm payload: {value:08x}")
 
 ##### EXAMPLE CODE #####
 #
-# print("MeteoWind Alarm creator example code")                                                                               # uncomment if you want to run it from IDE
-# d = creator(3, 120,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 298, 256)
-# d.createAlarm(1)
+print("MeteoWind Alarm creator example code")                                                                               # uncomment if you want to run it from IDE
+d = creator(3, 120,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 298, 256)
+d.createAlarm(1)
 
 
 # alarmType(0-3) snoozeTime in sec(0-61440 multiply of 120) tempUpperLower(0-3) lowTemp(-50-50) upTemp(-50-50) humUpperLower(0-3) lowHum(0-100) upHum(0-100) pressUpperLower(0-3) lowPress(0-108300) upPress(0-108300) minInterval(0-1023) debug(0-512)
 
 #python MeteoHelix_IoT_Pro_Gen2_alarm_creator.py 3 120 0 -16.4 2.8 3 66 85 1 57300 84610 298 256
-if __name__ == "__main__":                                                                                                    # uncomment if you want to run it from CMD line
-    print("MeteoWind Alarm creator example code")
-    d = creator(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]), float(sys.argv[5]), int(sys.argv[6]), int(sys.argv[7]), int(sys.argv[8]), int(sys.argv[9]), int(sys.argv[10]), int(sys.argv[11]), int(sys.argv[12]), int(sys.argv[13]))
-    d.createAlarm(1)
+# if __name__ == "__main__":                                                                                                    # uncomment if you want to run it from CMD line
+#     print("MeteoWind Alarm creator example code")
+#     d = creator(int(sys.argv[1]),int(sys.argv[2]),int(sys.argv[3]),float(sys.argv[4]), float(sys.argv[5]), int(sys.argv[6]), int(sys.argv[7]), int(sys.argv[8]), int(sys.argv[9]), int(sys.argv[10]), int(sys.argv[11]), int(sys.argv[12]), int(sys.argv[13]))
+#     d.createAlarm(1)
