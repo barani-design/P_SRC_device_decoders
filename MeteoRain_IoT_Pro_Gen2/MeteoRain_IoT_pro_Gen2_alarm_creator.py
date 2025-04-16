@@ -1,6 +1,6 @@
 #Meteo Rain Alarm creator ver.***
 import sys
-
+import math
 class creator:
     bitLenAlarmType = 2
     bitLenTime      = 9
@@ -16,6 +16,7 @@ class creator:
     def createAlarm(self, enablePrint):                                                                                # if print 1 then print parsed payload
         self.alarmType = list(str(bin(int(str(int(self.alarmType))))[2:].zfill(self.bitLenAlarmType)))
         self.snoozeTime = list(str(bin(int(str(int(self.snoozeTime/120))))[2:].zfill(self.bitLenTime)))
+        self.timeInterval = 728 / math.sqrt(self.timeInterval)
         self.timeInterval = list(str(bin(int(str(int(self.timeInterval))))[2:].zfill(self.bitLenInterval)))
         self.debug = list(str(bin(int(str(int(self.debug))))[2:].zfill(self.bitLenDebug)))
 
@@ -29,7 +30,7 @@ class creator:
 ##### EXAMPLE CODE #####
 
 print("MeteoRain Alarm creator example code")                                                                               # uncomment if you want to run it from IDE
-d = creator(0,600, 4, 1)
+d = creator(0,600, 10, 0)
 d.createAlarm(1)
 
 #alarmType(0-3) snoozeTime in sec(0-61440 multiply of 120) minInterval(0-1023) debug(0-2048)
