@@ -1,5 +1,6 @@
 #Meteo Helix Alarm creator ver.***
 import sys
+import math
 
 class creator:
     bitLenAlarmType = 2
@@ -36,18 +37,19 @@ class creator:
         self.alarmType = list(str(bin(int(str(int(self.alarmType))))[2:].zfill(self.bitLenAlarmType)))
         self.snoozeTime = list(str(bin(int(str(int(self.snoozeTime/120))))[2:].zfill(self.bitLenTime)))
 
-        self.tempUpperLower = list(str(bin(int(str(int(self.tempUpperLower))))[2:].zfill(self.bitLenUL)))               #
-        self.lowTemp = list(str(bin(int(str(int(((self.lowTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))                #
-        self.upTemp =  list(str(bin(int(str(int(((self.upTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))                 #
+        self.tempUpperLower = list(str(bin(int(str(int(self.tempUpperLower))))[2:].zfill(self.bitLenUL)))
+        self.lowTemp = list(str(bin(int(str(int(((self.lowTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))
+        self.upTemp =  list(str(bin(int(str(int(((self.upTemp*10)+500)))))[2:].zfill(self.bitLenTemp)))
 
-        self.humUpperLower = list(str(bin(int(str(int(self.humUpperLower))))[2:].zfill(self.bitLenUL)))                 #
-        self.upHum = list(str(bin(int(str(int(self.upHum))))[2:].zfill(self.bitLenHum)))                                #
-        self.lowHum = list(str(bin(int(str(int(self.lowHum))))[2:].zfill(self.bitLenHum)))                              #
+        self.humUpperLower = list(str(bin(int(str(int(self.humUpperLower))))[2:].zfill(self.bitLenUL)))
+        self.upHum = list(str(bin(int(str(int(self.upHum))))[2:].zfill(self.bitLenHum)))
+        self.lowHum = list(str(bin(int(str(int(self.lowHum))))[2:].zfill(self.bitLenHum)))
 
-        self.pressUpperLower = list(str(bin(int(str(int(self.pressUpperLower))))[2:].zfill(self.bitLenUL)))             #
-        self.upPress =  list(str(bin(int(str(int(((self.upPress/ 10)-3000)))))[2:].zfill(self.bitLenPress)))
+        self.pressUpperLower = list(str(bin(int(str(int(self.pressUpperLower))))[2:].zfill(self.bitLenUL)))
+        self.upPress =  list(str(bin(int(str(int(((self.upPress/10)-3000)))))[2:].zfill(self.bitLenPress)))
         self.lowPress = list(str(bin(int(str(int(((self.lowPress/10)-3000)))))[2:].zfill(self.bitLenPress)))
 
+        self.minInterval = 728 / math.sqrt(self.minInterval)
         self.minInterval = list(str(bin(int(str(int(self.minInterval))))[2:].zfill(self.bitLenMinInterval)))
         self.debug = list(str(bin(int(str(int(self.debug))))[2:].zfill(self.bitLenDebug)))
 
@@ -61,7 +63,7 @@ class creator:
 ##### EXAMPLE CODE #####
 #
 print("MeteoWind Alarm creator example code")                                                                               # uncomment if you want to run it from IDE
-d = creator(3, 120,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 298, 256)
+d = creator(3, 150,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 42, 256)
 d.createAlarm(1)
 
 
