@@ -1,4 +1,4 @@
-#MeteoAG Iot Pro periodic payload decoder ver.***
+#MeteoAg Iot Pro Gen2 periodic payload decoder ver.***
 import sys
 
 class parser:
