@@ -1,0 +1,1 @@
+Periodic Lora packets are shifted in time. The algorithm is as follows, the packet creation time is added to the transmission delay, which can be in the range of 1 - 30 seconds. The shift value is calculated by forward xor-ing the payload bytes. Example of obtaining the shift time from the payload in python is given here.
