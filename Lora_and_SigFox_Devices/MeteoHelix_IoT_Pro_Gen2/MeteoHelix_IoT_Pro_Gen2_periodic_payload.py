@@ -1,4 +1,4 @@
-#Meteo Helix decoder ver.***
+#MeteoHelix IoT Pro Gen2 decoder ver.12.6.2025***
 import sys
 
 class parser:
@@ -59,8 +59,11 @@ class parser:
     rainCorrectionLen     = 10
     rainCorrectionRes     = 0.01
 
-    dbgStart   = 126
-    dbgLen     = 2
+    heaterStart   = 126
+    heaterLen     = 1
+    
+    alarmStart = 127
+    alarmLen = 1
 
     def __init__(self, inputString, numOfBytes):                                                                        # internal storage for parsed variables
         self.rainCorrection = None
@@ -118,7 +121,8 @@ class parser:
             self.rainInterval = (728/self.rainInterval)*(728/self.rainInterval)
 
         self.rainCorrection = (int(''.join(self.binStringList[self.rainCorrectionStart: self.rainCorrectionStart + self.rainCorrectionLen]), 2) * self.rainCorrectionRes)
-        self.dbg = int(''.join(self.binStringList[self.dbgStart: self.dbgStart + self.dbgLen]), 2)
+        self.heater = int(''.join(self.binStringList[self.heaterStart: self.heaterStart + self.heaterLen]), 2)
+        self.alarm = int(''.join(self.binStringList[self.alarmStart: self.alarmStart + self.alarmLen]), 2)
 
         # for i in range(self.pressNum):
         #     self.press[i] = int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2) + self.pressOffset)
@@ -127,9 +131,9 @@ class parser:
             print("Index: " + str(self.index))
 
             if self.battState == 1:
-                print("Batt: >" + str(format(self.batt, '.4f')) + "V")
+                print("Batt: !=" + str(format(self.batt, '.4f')) + "V")
             else:
-                print("Batt: <" + str(format(self.batt, '.4f')) + "V")
+                print("Batt: ==" + str(format(self.batt, '.4f')) + "V")
 
             print("Temp: " + str(format(self.temp, '.4f')) + "C")
             print("Temp MIN: " + str(format(self.tempMin, '.4f')) + "C")
@@ -143,14 +147,12 @@ class parser:
             print("Irradiation MIN: " + str(format(self.irraMin, '.4f')) + "W/m2")
             print("Irradiation MAX: " + str(format(self.irraMax, '.4f')) + "W/m2")
 
-            print("Rain clicks: " + str(format(self.rainClicks, '.0f')))
-            print("Rain interval: " + str(format(self.rainInterval, '.3f')) + "s")
+            print("Rain clicks    : " + str(format(self.rainClicks, '.0f')))
+            print("Rain interval  : " + str(format(self.rainInterval, '.3f')) + "s")
             print("Rain corrcetion: " + str(format(self.rainCorrection, '.2f')))
-
-            if self.dbg == 1:
-                print("DBG: Pressure sensor error!")
-            else:
-                print("DBG: No error")
+            print("Heater activated: " + str(format(self.heater, '')))
+            print("Alarm sent: " + str(format(self.alarm, '')))
+           
 
 ##### EXAMPLE CODE #####
 
