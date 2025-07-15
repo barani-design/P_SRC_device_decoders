@@ -13,33 +13,45 @@ class parser:
     battOffset = 3.3
 
     tempStart  = 9
-    tempLen    = 9
-    tempRes    = 0.25                                                                                                   # if resolution is different than 1
-    tempOffset = -50                                                                                                    # temp offset because this is minimal value
+    tempLen    = 6
+    tempRes    = 2                                                                                                   # if resolution is different than 1
+    tempOffset = -45                                                                                                    # temp offset because this is minimal value
 
-    humStart   = 18
-    humLen     = 7
+    humStart   = 15
+    humLen     = 4
+    humRes     = 4
+    humOffset  = 40
 
-    pressBaseStart = 25                                                                                                 # starting position for pressures
-    pressNum   = 6                                                                                                      # numbers of pressure sensor's
-    pressLen   = 17
-    pressOffset = 30000
+    refPressStart = 19
+    refPressLen = 13
+    refPressRes = 10
+    refPressOffset = 30000
 
-    dbgStart   = 127
-    dbgLen     = 1
+    pressCount = 6
+
+    diffPressStart = 32
+    diffPressLen = 10
+    diffPressRes = 0.5
+    diffPressOffset = -256
+
+    stdDevStart = 92
+    stdDevLen = 6
+    stdDevRes = 1
+
 
     def __init__(self, inputString, numOfBytes):                                                                        # internal storage for parsed variables
         self.battState = None
         self.batt = None
         self.dbg = None
-        self.press = [0] * self.pressNum
+        self.refPress = None
         self.hum = None
         self.temp = None
         self.index = None
         self.binStringList = None
         self.inputString = inputString
         self.numOfBytes = numOfBytes
-
+        self.diffPress = [0] * self.pressCount
+        self.stdDev = [0] * self.pressCount
     def getBinString(self):                                                                                             # convert HEX string to binary string
         self.binString = bin(int(self.inputString, self.base))[2:].zfill(self.numOfBytes*8)
         return self.binString
@@ -59,11 +71,14 @@ class parser:
         self.battState = int(''.join(self.binStringList[self.battStart : self.battStart + self.battLen]),2)
         self.batt = ((self.index % 5) * self.battRes) + self.battOffset
         self.temp = (int(''.join(self.binStringList[self.tempStart: self.tempStart + self.tempLen]), 2) * self.tempRes) + self.tempOffset
-        self.hum = int(''.join(self.binStringList[self.humStart : self.humStart + self.humLen]),2)
-        self.dbg = int(''.join(self.binStringList[self.dbgStart: self.dbgStart + self.dbgLen]), 2)
+        self.hum =  (int(''.join(self.binStringList[self.humStart : self.humStart + self.humLen]),2) * self.humRes) + self.humOffset
+        self.refPress = int(''.join(self.binStringList[self.refPressStart : self.refPressStart + self.refPressLen]),2)
 
-        for i in range(self.pressNum):
-            self.press[i] = int(int(''.join(self.binStringList[self.pressBaseStart + (self.pressLen * i) : self.pressBaseStart + (self.pressLen * i) + self.pressLen]),2) + self.pressOffset)
+        for i in range(self.pressCount):
+            self.diffPress[i] = (int(''.join(self.binStringList[self.diffPressStart + (self.diffPressLen * i) : self.diffPressStart + (self.diffPressLen * i) + self.diffPressLen]),2) * self.diffPressRes) + self.diffPressOffset
+
+        for i in range(self.pressCount):
+            self.stdDev[i] = int(''.join(self.binStringList[self.stdDevStart + (self.stdDevLen * i) : self.stdDevStart + (self.stdDevLen * i) + self.stdDevLen]),2)
 
         if enablePrint == 1:
             print("Index: " + str(self.index))
@@ -76,8 +91,11 @@ class parser:
             print("Temp: " + str(self.temp) + "C")
             print("Hum: " + str(self.hum) + "%")
 
-            for i in range(self.pressNum):
-                print("Press_"+ str(i) +": "+ str(self.press[i]) + "Pa")
+            for i in range(self.pressCount):
+                print("diffPress"+ str(i) +": "+ str(format(self.diffPress[i], '.1f')) + "Pa")
+
+            for i in range(self.pressCount):
+                print("stdDev"+ str(i) +": "+ str(format(self.stdDev[i], '.1f')) + "Pa")
 
             if self.dbg == 1:
                 print("DBG: Pressure sensor error!")
