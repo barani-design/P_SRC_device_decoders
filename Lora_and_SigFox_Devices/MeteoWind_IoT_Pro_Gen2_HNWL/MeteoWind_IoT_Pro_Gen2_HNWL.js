@@ -86,14 +86,14 @@ function decodeUplink(input) {
     var hz_avg7 = precisionRound(bitShift(10)*0.1, 2);
     var hz_avg8 = precisionRound(bitShift(10)*0.1, 2);
 
-    var deg_1s_avg1 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg2 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg3 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg4 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg5 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg6 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg7 = precisionRound(bitShift(8)*2, 1) + 1;
-    var deg_1s_avg8 = precisionRound(bitShift(8)*2, 1) + 1;
+    var deg_1s_avg1 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg2 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg3 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg4 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg5 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg6 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg7 = precisionRound(bitShift(8)*2, 1) ;
+    var deg_1s_avg8 = precisionRound(bitShift(8)*2, 1) ;
   
     var debug = precisionRound(bitShift(6)*1, 1);
 

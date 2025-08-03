@@ -61,7 +61,7 @@ class parser:
             self.windAvg[i] = float(int(''.join(self.binStringList[self.windAvgBase + (self.windAvgLen * i): self.windAvgBase + (self.windAvgLen * i) + self.windAvgLen]), 2) * self.windAvgRes)
 
         for i in range(self.dirAvgNum):
-            self.dirAvg[i] = float(int(''.join(self.binStringList[self.dirAvgBase + (self.dirAvgLen * i): self.dirAvgBase + (self.dirAvgLen * i) + self.dirAvgLen]), 2) * self.dirAvgRes) + 1       # 1 because compensation of 0
+            self.dirAvg[i] = float(int(''.join(self.binStringList[self.dirAvgBase + (self.dirAvgLen * i): self.dirAvgBase + (self.dirAvgLen * i) + self.dirAvgLen]), 2) * self.dirAvgRes) 
 
 
         if enablePrint == 1:
