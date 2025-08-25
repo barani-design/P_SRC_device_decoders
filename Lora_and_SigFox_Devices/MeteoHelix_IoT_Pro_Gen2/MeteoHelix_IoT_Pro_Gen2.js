@@ -81,8 +81,8 @@ function decodeUplink(input) {
     var temp_min_diff = precisionRound(bitShift(8)*0.05, 2);
     var temp_max_diff = precisionRound(bitShift(8)*0.05, 2);
     
-    var temp_min = temp_avg - temp_min_diff
-    var temp_max = temp_avg + temp_min_diff
+    var temp_min = temp_avg - temp_min_diff;
+    var temp_max = temp_avg + temp_min_diff;
     
     //tem_avg = Math.round(temp_avg * 10) / 10;
     temp_min = Math.round(temp_min * 100) / 100;
@@ -97,19 +97,19 @@ function decodeUplink(input) {
     var irr_min_diff = precisionRound(bitShift(10)*2, 2);
     var irr_max_diff = precisionRound(bitShift(10)*2, 2);
     
-    var irr_min = irradiation - irr_min_diff
-    var irr_max = irradiation + irr_max_diff
+    var irr_min = irradiation - irr_min_diff;
+    var irr_max = irradiation + irr_max_diff;
     
     var rain_clicks = precisionRound(bitShift(12)*1, 2);
     
     var t_int = precisionRound(bitShift(10)*1, 2);
     
-    var time_interval = 0.0
+    var time_interval = 0.0;
     
     if ( t_int > 0 )
     {
-        time_interval = 728 / t_int
-        time_interval = 	 time_interval * time_interval   
+        time_interval = 728 / t_int;
+        time_interval = time_interval * time_interval;  
     }
     
     var rain_intens = precisionRound(bitShift(10)*0,01, 2);
