@@ -51,20 +51,7 @@ function decodeUplink(input) {
         var factor = Math.pow(10, precision);
         return Math.round(number * factor) / factor;
     }
-    
-    function batteryIndicator(index, battery_bit, min_value=3.3) {
-        var remainder = index % 5;
-	 
-	if ( remainder > 4)
-        {
-          return 0;
-        }
-        	
-        var result = remainder < 5 ? remainder * 0.2 + min_value : remainder * 0.2 + min_value - 1;
-        
-        var rounded = Math.round(result * 10) / 10;
-        return battery_bit === 1 ? `== ${rounded} V` : `!= ${rounded} V`;
-    }    
+  
 
     bindata = data2bits(bytes);
 

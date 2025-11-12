@@ -63,7 +63,7 @@ function decodeUplink(input) {
         var result = remainder < 5 ? remainder * 0.2 + min_value : remainder * 0.2 + min_value - 1;
         
         var rounded = Math.round(result * 10) / 10;
-        return battery_bit === 1 ? `== ${rounded} V` : `!= ${rounded} V`;
+        return battery_bit === 1 ? `> ${rounded} V` : ` -- `;
     }    
 
     bindata = data2bits(bytes);
