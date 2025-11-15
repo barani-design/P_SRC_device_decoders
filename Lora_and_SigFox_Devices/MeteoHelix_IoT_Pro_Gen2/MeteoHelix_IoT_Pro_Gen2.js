@@ -82,7 +82,7 @@ function decodeUplink(input) {
     var temp_max_diff = precisionRound(bitShift(8)*0.05, 2);
     
     var temp_min = temp_avg - temp_min_diff;
-    var temp_max = temp_avg + temp_min_diff;
+    var temp_max = temp_avg + temp_max_diff;
     
     //tem_avg = Math.round(temp_avg * 10) / 10;
     temp_min = Math.round(temp_min * 100) / 100;
