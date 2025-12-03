@@ -1,0 +1,1 @@
+All Gen2 devices transmit service message no. 1 to Lora port 2 after being switched on. They then begin to transmit regular periodic messages to port 1. This new feature is still under development and will be officially supported from approximately July 2026.
