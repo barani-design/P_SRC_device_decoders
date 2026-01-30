@@ -51,12 +51,12 @@ function decodeUplink(input) {
     
     function batteryIndicator(index, battery_bit, min_value=3.3) {
         var remainder = index % 5;
-	
-	if ( remainder > 4)
+
+        if ( remainder > 4)
         {
           return 0;
         }
-	
+
         var result = remainder < 5 ? remainder * 0.2 + min_value : remainder * 0.2 + min_value - 1;       
         var rounded = Math.round(result * 10) / 10;
         return battery_bit === 1 ? `> ${rounded} V` : ` -- `;
@@ -77,7 +77,7 @@ function decodeUplink(input) {
     {
       time_bt = ( 728 / tim );
       time_bt = time_bt * time_bt;
-      
+      time_bt = time_bt.toFixed(3); // 3 decimals
     }
   
     //var time_bt = ( 728 / tim );
@@ -89,7 +89,7 @@ function decodeUplink(input) {
 
 
     var decoded = {
-	"00A_device" : "MeteoRain IoT Pro Gen2",
+        "00A_device" : "MeteoRain IoT Pro Gen2",
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,

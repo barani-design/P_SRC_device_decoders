@@ -109,7 +109,8 @@ function decodeUplink(input) {
     if ( t_int > 0 )
     {
         time_interval = 728 / t_int;
-        time_interval = time_interval * time_interval;  
+        time_interval = time_interval * time_interval; 
+        time_interval = time_interval.toFixed(3); // 3 decimals	    
     }
     
     var rain_intens = precisionRound(bitShift(10)*0,01, 2);
@@ -121,7 +122,7 @@ function decodeUplink(input) {
 
 
     var decoded = {
-	"00A_device" : "MeteoHelix IoT Pro Gen2",
+        "00A_device" : "MeteoHelix IoT Pro Gen2",
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,
@@ -134,9 +135,9 @@ function decodeUplink(input) {
         "irr_min": irr_min,
         "irr_max": irr_max,
         "rain_clicks": rain_clicks,
-	"time_interval": time_interval,
-	"rain_intens": rain_intens,
-	"heater_activated": heater_activated,
+        "time_interval": time_interval,
+        "rain_intens": rain_intens,
+        "heater_activated": heater_activated,
         "alarm_dbg": alarm_dbg,
     };
 
