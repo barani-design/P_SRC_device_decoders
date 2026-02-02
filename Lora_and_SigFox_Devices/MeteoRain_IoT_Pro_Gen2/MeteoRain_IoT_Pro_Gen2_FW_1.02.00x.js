@@ -85,7 +85,7 @@ function decodeUplink(input) {
     
     var rain_intensity = precisionRound(bitShift(12)*0.01, 2);
     var temp = precisionRound(bitShift(1)*1, 2);
-    var debug = precisionRound(bitShift(3)*1, 2);
+    var debug = precisionRound(bitShift(4)*1, 2);
 
 
     var decoded = {
