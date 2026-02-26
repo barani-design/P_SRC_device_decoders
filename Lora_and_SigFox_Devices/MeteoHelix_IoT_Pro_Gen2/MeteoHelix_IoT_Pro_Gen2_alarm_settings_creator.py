@@ -1,4 +1,5 @@
-#Meteo Helix Alarm creator ver.***
+#Meteo Helix Alarm Settings creator ver.***
+#generate hexa string, which can be used to set-up Meteohelix alarm
 import sys
 import math
 
@@ -67,7 +68,23 @@ d = creator(3, 150,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 42, 256)
 d.createAlarm(1)
 
 
-# alarmType(0-3) snoozeTime in sec(0-61440 multiply of 120) tempUpperLower(0-3) lowTemp(-50-50) upTemp(-50-50) humUpperLower(0-3) lowHum(0-100) upHum(0-100) pressUpperLower(0-3) lowPress(0-108300) upPress(0-108300) minInterval(0-1023) debug(0-512)
+# alarmType(0-3) - can be 00, or 01, or 02 - 
+# snoozeTime in sec(0-61440 multiply of 120) so for example 5 means 5 *120 = 600 seconds 
+# tempUpperLower(0-3) 0 - Alarm is OFF, 1 - only lower temperature alarm is on, 2 - only upper temperature alarm is ON, 3 - both lower and upper are ON
+# lowTemp(-50-50) temperature, under which is lower alarm sended
+# upTemp(-50-50) temperature over which is upper alarm sended
+# humUpperLower(0-3) 
+# lowHum(0-100) 
+# upHum(0-100) 
+# pressUpperLower(0-3) 
+# lowPress(0-108300) 
+# upPress(0-108300) 
+# minInterval(0-1023) - for Rain click, default is 364, which means 4 seconds between clicks
+# debug(0-512) - not used
+
+#example: alarm type 2, snooze=120, lower alarm ON = 1, lower temp = -5, uppertemp = 31, hum alarm OFF= 0, hummin = 0, hum max =100, pressalarm OFF = 0, pressmin = 100000 /Pa/ pressmax = 10000 /Pa/, time = 1023 / 559844second - so off/ debug = 0 
+#d = creator(2, 120, 1, -5, 31, 0, 0, 100, 0, 100000, 100000, 1023, 0)
+	
 
 #python MeteoHelix_IoT_Pro_Gen2_alarm_creator.py 3 120 0 -16.4 2.8 3 66 85 1 57300 84610 298 256
 # if __name__ == "__main__":                                                                                                    # uncomment if you want to run it from CMD line
