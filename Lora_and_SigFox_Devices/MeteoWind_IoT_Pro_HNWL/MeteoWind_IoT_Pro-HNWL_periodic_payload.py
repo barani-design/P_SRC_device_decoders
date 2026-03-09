@@ -67,10 +67,7 @@ class parser:
         if enablePrint == 1:
             print("Index: " + str(self.index))
 
-            if self.battState == 1:
-                print("Batt: >" + str(format(self.batt, '.4f')) + "V")
-            else:
-                print("Batt: <" + str(format(self.batt, '.4f')) + "V")
+            print("Batt: " + str(format(self.batt, '.2f')) + "V") 
 
             for i in range(self.windAvgNum):
                 print("Wind_avg_"+ str(i) +": "+ str(format(self.windAvg[i], '.4f')) + "Hz")
