@@ -1,4 +1,4 @@
-#Meteo Wind parser ver.***
+#Meteo Wind IoT Pro Gen2 parser ver.***
 import sys
 
 class parser:
@@ -54,7 +54,7 @@ class parser:
 
     time1sGustStart = 99
     time1sGustLen   = 7
-    time1sGustRes   = 1
+    time1sGustRes   = 5
 
     alarmSentStart  = 106
     alarmSentLen    = 1
@@ -121,19 +121,19 @@ class parser:
             if self.battState == 1:
                 print("Batt: >" + str(format(self.batt, '.4f')) + "V")
             else:
-                print("Batt: <" + str(format(self.batt, '.4f')) + "V")
+                print("Batt: -- ")
 
-            print("Hz_avg: " + str(format(self.hzAvg, '.4f')) + "Hz")
-            print("Hz_3s_gust: " + str(format(self.hz3sGust, '.4f')) + "Hz")
-            print("Hz_1s_gust: " + str(format(self.hz1sGust, '.4f')) + "Hz")
-            print("Hz_3s_min: " + str(format(self.hz3sMin, '.4f')) + "Hz")
-            print("Hz_1s_stdev: " + str(format(self.hz1StdDev, '.4f')) + "Hz")
-            print("Deg_1s_avg: " + str(format(self.deg1sAvg, '.4f')) + "deg")
-            print("Deg_1s_gust: " + str(format(self.deg1sGust, '.4f')) + "deg")
-            print("Deg_1s_stdev: " + str(format(self.deg1sStdDev, '.4f')) + "deg")
-            print("Deg_ccw_min: " + str(format(self.degCcwMin, '.4f')) + "deg")
-            print("Deg_cw_max: " + str(format(self.degCwMax, '.4f')) + "deg")
-            print("Time_1s_gust: " + str(format(self.time1sGust, '.4f')) + "deg")
+            print("Hz_avg: " + str(format(self.hzAvg, '.2f')) + "Hz")
+            print("Hz_3s_gust: " + str(format(self.hz3sGust, '.2f')) + "Hz")
+            print("Hz_1s_gust: " + str(format(self.hz1sGust, '.2f')) + "Hz")
+            print("Hz_3s_min: " + str(format(self.hz3sMin, '.2f')) + "Hz")
+            print("Hz_1s_stdev: " + str(format(self.hz1StdDev, '.2f')) + "Hz")
+            print("Deg_1s_avg: " + str(format(self.deg1sAvg, '.2f')) + "deg")
+            print("Deg_1s_gust: " + str(format(self.deg1sGust, '.2f')) + "deg")
+            print("Deg_1s_stdev: " + str(format(self.deg1sStdDev, '.2f')) + "deg")
+            print("Deg_ccw_min: " + str(format(self.degCcwMin, '.2f')) + "deg")
+            print("Deg_cw_max: " + str(format(self.degCwMax, '.2f')) + "deg")
+            print("Time_1s_gust: " + str(format(self.time1sGust, '.2f')) + "deg")
 
             if self.alarmSent == 1:
                 print("Alarm sent!")
@@ -152,7 +152,7 @@ class parser:
 # d.parsePayload(1)
 
 if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-    print("MeteoWind parser example code")
+    print("MeteoWind IoT Pro Gen2 parser example code")
     bytesToDecode = 14
     d = parser(str(sys.argv[1]), bytesToDecode)
     d.parsePayload(1)

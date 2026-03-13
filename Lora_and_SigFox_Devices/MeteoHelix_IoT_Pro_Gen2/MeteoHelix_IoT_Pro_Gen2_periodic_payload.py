@@ -131,21 +131,21 @@ class parser:
             print("Index: " + str(self.index))
 
             if self.battState == 1:
-                print("Batt: !=" + str(format(self.batt, '.4f')) + "V")
+                print("Batt: >" + str(format(self.batt, '.2f')) + "V")
             else:
-                print("Batt: ==" + str(format(self.batt, '.4f')) + "V")
+                print("Batt: == ")
 
-            print("Temp: " + str(format(self.temp, '.4f')) + "C")
-            print("Temp MIN: " + str(format(self.tempMin, '.4f')) + "C")
-            print("Temp MAX: " + str(format(self.tempMax, '.4f')) + "C")
-            print("Hum: " + str(format(self.hum, '.4f')) + "%")
+            print("Temp: " + str(format(self.temp, '.2f')) + "C")
+            print("Temp MIN: " + str(format(self.tempMin, '.2f')) + "C")
+            print("Temp MAX: " + str(format(self.tempMax, '.2f')) + "C")
+            print("Hum: " + str(format(self.hum, '.2f')) + "%")
 
             for i in range(self.pressNum):
-                print("Press_"+ str(i) +": "+ str(format(self.press[i], '.4f')) + "Pa")
+                print("Press_"+ str(i) +": "+ str(format(self.press[i], '.2f')) + "Pa")
 
             print("Irradiation: " + str(format(self.irra, '.4f')) + "W/m2")
-            print("Irradiation MIN: " + str(format(self.irraMin, '.4f')) + "W/m2")
-            print("Irradiation MAX: " + str(format(self.irraMax, '.4f')) + "W/m2")
+            print("Irradiation MIN: " + str(format(self.irraMin, '.2f')) + "W/m2")
+            print("Irradiation MAX: " + str(format(self.irraMax, '.2f')) + "W/m2")
 
             print("Rain clicks    : " + str(format(self.rainClicks, '.0f')))
             print("Rain interval  : " + str(format(self.rainInterval, '.3f')) + "s")
@@ -161,7 +161,7 @@ class parser:
 # d.parsePayload(1)
 
 if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-    print("MeteoHelix decoder example code")
+    print("MeteoHelix IoT Pro Gen2 decoder example code")
     bytesToDecode = 16
     d = parser(str(sys.argv[1]), bytesToDecode)
     d.parsePayload(1)

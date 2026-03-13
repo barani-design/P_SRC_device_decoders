@@ -1,4 +1,4 @@
-#Meteo Rain decoder ver.***
+#Meteo Rain IoT Pro Gen2 decoder ver.***
 import sys
 
 class parser:
@@ -80,7 +80,7 @@ class parser:
             if self.battState == 1:
                 print("Batt: >" + str(format(self.batt, '.4f')) + "V")
             else:
-                print("Batt: <" + str(format(self.batt, '.4f')) + "V")
+                print("Batt: -- ")
 
             print("Rain clicks: " + str(format(self.rainClicks, '.0f')))
             print("Rain interval: " + str(format(self.rainInterval, '.3f')) + "s")
@@ -98,12 +98,12 @@ class parser:
 
 ##### EXAMPLE CODE #####
 
-print("MeteoRain decoder example code")                                                                               # uncomment if you want to run it from IDE
-d = parser("0b8013240051",6)
-d.parsePayload(1)
+#print("MeteoRain IoT Pro Gen2 decoder example code")                                                                               # uncomment if you want to run it from IDE
+#d = parser("0b8013240051",6)
+#d.parsePayload(1)
 
-# if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-#     print("MeteoRain decoder example code")
-#     bytesToDecode = 6
-#     d = parser(str(sys.argv[1]), bytesToDecode)
-#     d.parsePayload(1)
+ if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
+     print("MeteoRain decoder example code")
+     bytesToDecode = 6
+     d = parser(str(sys.argv[1]), bytesToDecode)
+     d.parsePayload(1)
