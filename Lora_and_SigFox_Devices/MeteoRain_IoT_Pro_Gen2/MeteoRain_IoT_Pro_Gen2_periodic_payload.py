@@ -92,18 +92,20 @@ class parser:
                 print("Temperature is below 2C")
 
             if self.dbg == 1:
-                print("DBG: Pressure sensor error!")
+                print("DBG: Set")
             else:
-                print("DBG: No error")
+                print("DBG: Not set")
 
 ##### EXAMPLE CODE #####
 
-#print("MeteoRain IoT Pro Gen2 decoder example code")                                                                               # uncomment if you want to run it from IDE
+# uncomment if you want to run it from IDE
+#print("MeteoRain IoT Pro Gen2 decoder example code") 
 #d = parser("0b8013240051",6)
 #d.parsePayload(1)
 
- if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
-     print("MeteoRain decoder example code")
-     bytesToDecode = 6
-     d = parser(str(sys.argv[1]), bytesToDecode)
-     d.parsePayload(1)
+# uncomment if you want to run it from CMD line
+if __name__ == "__main__":
+    print("MeteoRain decoder example code")
+    bytesToDecode = 6
+    d = parser(str(sys.argv[1]), bytesToDecode)
+    d.parsePayload(1)
