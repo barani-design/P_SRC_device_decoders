@@ -60,7 +60,7 @@ class parser:
     alarmSentLen    = 1
 
     dbgStart   = 107
-    dbgLen     = 1
+    dbgLen     = 5
 
     def __init__(self, inputString, numOfBytes):                                                                        # internal storage for parsed variables
         self.hz3sMin = None
@@ -141,9 +141,9 @@ class parser:
                 print("Alarm did not occured")
 
             if self.dbg == 1:
-                print("DBG: Pressure sensor error!")
+                print("DBG: Set")
             else:
-                print("DBG: No error")
+                print("DBG: Not Set")
 
 ##### EXAMPLE CODE #####
 
