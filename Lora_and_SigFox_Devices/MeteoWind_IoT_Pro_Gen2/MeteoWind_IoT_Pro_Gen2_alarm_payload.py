@@ -77,7 +77,7 @@ class parser:
 #d = parser("084D034D9800",6)
 #d.parsePayload(1)
 
- if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
+if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
      print("MeteoWind Alarm parser example code")
      bytesToDecode = 6
      d = parser(str(sys.argv[1]), bytesToDecode)
