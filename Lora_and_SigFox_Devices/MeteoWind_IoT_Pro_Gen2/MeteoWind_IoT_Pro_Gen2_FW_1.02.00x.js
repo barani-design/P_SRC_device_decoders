@@ -111,7 +111,7 @@ function decodeUplink(input) {
         "dir_1s_gust": deg_1s_gust,
         "dir_1s_stdev": deg_1s_stdev,
 	"dir_ccw_min": deg_ccw_min,
-	"dir_ccw_max": deg_ccw_max,
+	"dir_cw_max": deg_ccw_max,
         "gust_time": gust_time,
         "alarm_sent": alarm_sent,
     };
