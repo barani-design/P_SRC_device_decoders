@@ -64,7 +64,7 @@ class creator:
 ##### EXAMPLE CODE #####
 #
 print("MeteoWind Alarm creator example code")                                                                               # uncomment if you want to run it from IDE
-d = creator(3, 150,0, -16.4, 2.8, 3, 66, 85, 1, 57300, 84610, 42, 256)
+d = creator(1, 120, 2, 25, 31, 0, 0, 100, 0, 100000, 100000, 364, 0)
 d.createAlarm(1)
 
 
