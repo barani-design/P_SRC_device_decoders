@@ -12,6 +12,9 @@ class parser:
     battRes     = 0.2
     battOffset  = 3.3
 
+    anemoSlope  = 0.6335                                                                                                 # anemometer Hz -> m/s calibration (m/s = Hz*slope + offset)
+    anemoOffset = 0.3582
+
     windAveStart  = 9
     windAveLen    = 12
     windAveRes    = 0.02
@@ -96,7 +99,11 @@ class parser:
         self.wind3sGust = self.windAve + (int(''.join(self.binStringList[self.wind3sGustStart: self.wind3sGustStart + self.wind3sGustLen]), 2) * self.wind3sGustRes)
         self.wind1sGust = self.wind3sGust + (int(''.join(self.binStringList[self.wind1sGustStart: self.wind1sGustStart + self.wind1sGustLen]), 2) * self.wind1sGustRes)
         self.wind3sMin =  (int(''.join(self.binStringList[self.wind3sMinStart: self.wind3sMinStart + self.wind3sMinLen]), 2) * self.wind3sMinRes)
-        self.windStdDev  = (int(''.join(self.binStringList[self.windStdDevStart: self.windStdDevStart + self.windStdDevLen]), 2) * self.windStdDevRes)
+        self.windStdDev  = (int(''.join(self.binStringList[self.windStdDevStart: self.windStdDevStart + self.windStdDevLen]), 2) * self.windStdDevRes)  # left in Hz (Excel does not convert stdev)
+        self.windAve = (self.windAve * self.anemoSlope + self.anemoOffset) if self.windAve > 0 else 0                    # Hz -> m/s (Excel row 21), 0 m/s when no rotation
+        self.wind3sGust = (self.wind3sGust * self.anemoSlope + self.anemoOffset) if self.wind3sGust > 0 else 0
+        self.wind1sGust = (self.wind1sGust * self.anemoSlope + self.anemoOffset) if self.wind1sGust > 0 else 0
+        self.wind3sMin = (self.wind3sMin * self.anemoSlope + self.anemoOffset) if self.wind3sMin > 0 else 0
         self.dirAve = (int(''.join(self.binStringList[self.dirAveStart: self.dirAveStart + self.dirAveLen]), 2) * self.dirAveRes)
         self.dir1sGust  = (int(''.join(self.binStringList[self.dir1sGustStart: self.dir1sGustStart + self.dir1sGustLen]), 2) * self.dir1sGustRes)
         self.dirStdDev = (int(''.join(self.binStringList[self.dirStdDevStart: self.dirStdDevStart + self.dirStdDevLen]), 2) * self.dirStdDevRes)
@@ -111,10 +118,10 @@ class parser:
             else:
                 print("Batt: != " + str(format(self.batt, '.1f')) + "V")
 
-            print("Hz_avg: " + str(format(self.windAve, '.2f')) + "Hz")
-            print("Hz_3s_gust: " + str(format(self.wind3sGust, '.2f')) + "Hz")
-            print("Hz_1s_gust: " + str(format(self.wind1sGust, '.2f')) + "Hz")
-            print("Hz_3s_min: " + str(format(self.wind3sMin, '.2f')) + "Hz")
+            print("Wind_avg: " + str(format(self.windAve, '.2f')) + "m/s")
+            print("Wind_3s_gust: " + str(format(self.wind3sGust, '.2f')) + "m/s")
+            print("Wind_1s_gust: " + str(format(self.wind1sGust, '.2f')) + "m/s")
+            print("Wind_3s_min: " + str(format(self.wind3sMin, '.2f')) + "m/s")
             print("Hz_1s_stdev: " + str(format(self.windStdDev, '.2f')) + "Hz")
             print("Deg_1s_avg: " + str(format(self.dirAve, '.2f')) + "deg")
             print("Deg_1s_gust: " + str(format(self.dir1sGust, '.2f')) + "deg")
