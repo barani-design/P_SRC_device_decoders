@@ -116,7 +116,7 @@ class parser:
             if self.battState == 1:
                 print("Batt: == " + str(format(self.batt, '.1f')) + "V")
             else:
-                print("Batt: != " + str(format(self.batt, '.1f')) + "V")
+                print("Batt: -- ") ## + str(format(self.batt, '.1f')) + "V")
 
             print("Wind_avg: " + str(format(self.windAve, '.2f')) + "m/s")
             print("Wind_3s_gust: " + str(format(self.wind3sGust, '.2f')) + "m/s")
