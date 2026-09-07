@@ -1,12 +1,13 @@
-//MeteoWind_IoT_Pro_Gen2 periodic payload decoder
+//MeteoWind_IoT_Pro_Gen2 periodic payload decoder 2026 QUADRA
+
 function decodeUplink(input) {
     var bytes = input.bytes;
+    
+    var c1 = 0.675;
+    var c2 = 0.00065;
 
     var pos = 0;
     var bindata = "";
-
-    var anemometer_slope = 0.6335;
-    var anemometer_offset = 0.3582;
 
     var ConvertBase = function (num) {
         return {
@@ -74,16 +75,16 @@ function decodeUplink(input) {
     var battery = batteryIndicator(index, battery_bit);
 
     var hz_avg = precisionRound(bitShift(12)*0.02, 2);
-    var wind_ave = hz_avg > 0 ? precisionRound(hz_avg*anemometer_slope+anemometer_offset, 2) : 0;
+    var wind_ave = hz_avg > 0 ? precisionRound( ( -c2*(hz_avg * hz_avg ) ) + ( c1 * hz_avg ) + 0.2, 2) : 0;
 
     var hz_3sgust = hz_avg + precisionRound(bitShift(9)*0.1, 2);
-    var wind_3sgust = hz_3sgust > 0 ? precisionRound(hz_3sgust*anemometer_slope+anemometer_offset, 2) : 0;
+    var wind_3sgust = hz_3sgust > 0 ? precisionRound( ( -c2*(hz_3sgust * hz_3sgust ) ) + (c1 * hz_3sgust) + 0.2, 2) : 0;
 
     var hz_1sgust = hz_3sgust + precisionRound(bitShift(8)*0.1, 2);
-    var wind_1sgust = hz_1sgust > 0 ? precisionRound(hz_1sgust*anemometer_slope+anemometer_offset, 2) : 0;
+    var wind_1sgust = hz_1sgust > 0 ? precisionRound( ( -c2*(hz_1sgust * hz_1sgust ) ) + (c1 * hz_1sgust) + 0.2, 2) : 0;
 
     var hz_3min = precisionRound(bitShift(9)*0.1, 2);
-    var wind_3smin = hz_3min > 0 ? precisionRound(hz_3min*anemometer_slope+anemometer_offset, 2) : 0;
+    var wind_3smin = hz_3min > 0 ? precisionRound(-c2*(hz_3smin * hz_3smin ) + (c1 * hz_3smin) + 0.2, 2) : 0;
 
     var hz_stdev = precisionRound(bitShift(8)*0.1, 2);
 
@@ -102,13 +103,13 @@ function decodeUplink(input) {
         "index": index,
         "battery_bit": battery_bit,
         "battery_indicator": battery,
-        "wind_ave": wind_ave,
-        "wind_3s_gust": wind_3sgust,
-        "wind_1s_gust": wind_1sgust,
-        "wind_3s_min": wind_3smin,
+        "wind_ave_ms": wind_ave,
+        "wind_3s_gust_ms": wind_3sgust,
+        "wind_1s_gust_ms": wind_1sgust,
+        "wind_3s_min_ms": wind_3smin,
         "wind_stdev": hz_stdev,
-        "dir_ave": deg_1s_avg,
-        "dir_1s_gust": deg_1s_gust,
+        "dir_ave_deg": deg_1s_avg,
+        "dir_1s_gust_deg": deg_1s_gust,
         "dir_1s_stdev": deg_1s_stdev,
 	"dir_ccw_min": deg_ccw_min,
 	"dir_cw_max": deg_ccw_max,
