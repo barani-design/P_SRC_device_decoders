@@ -62,7 +62,7 @@ class parser:
     dbgStart   = 107
     dbgLen     = 5
 
-    def __init__(self, inputString, numOfBytes):                                                                        # internal storage for parsed variables
+    def __init__(self, inputString, numOfBytes):                                                                        
         self.hz3sMin = None
         self.hz1StdDev = None
         self.deg1sAvg = None
@@ -83,21 +83,21 @@ class parser:
         self.inputString = inputString
         self.numOfBytes = numOfBytes
 
-    def getBinString(self):                                                                                             # convert HEX string to binary string
+    def getBinString(self):                                                                                             
         self.binString = bin(int(self.inputString, self.base))[2:].zfill(self.numOfBytes*8)
         return self.binString
 
-    def getBinStringList(self):                                                                                         # convert HEX string to binary list
+    def getBinStringList(self):                                                                                        
         self.binStringList = list(bin(int(self.inputString, self.base))[2:].zfill(self.numOfBytes*8))
         return self.binStringList
 
-    def parseOneVariable(self, varStartPos, varLen, varOffset):                                                         # parse only one variable, you has to setup start position of first bit and variable length
+    def parseOneVariable(self, varStartPos, varLen, varOffset):                                                        
         self.binStringList = list(bin(int(self.inputString, self.base))[2:].zfill(self.numOfBytes * 8))
         num = ''.join(self.binStringList[varStartPos:varStartPos+varLen])
         print("Parser variable", int(num, 2) + varOffset)
 
-    def parsePayload(self, enablePrint):                                                                                # if print 1 then print parsed payload
-        self.binStringList = list(bin(int(self.inputString, self.base))[2:].zfill(self.numOfBytes * 8))                 # parse payload string and convert it to variables
+    def parsePayload(self, enablePrint):                                                                                
+        self.binStringList = list(bin(int(self.inputString, self.base))[2:].zfill(self.numOfBytes * 8))                 
         self.index = int(''.join(self.binStringList[self.indexStart : self.indexStart + self.indexLen]),2)
         self.battState = int(''.join(self.binStringList[self.battStart : self.battStart + self.battLen]),2)
         self.batt = ((self.index % 5) * self.battRes) + self.battOffset
@@ -114,6 +114,32 @@ class parser:
         self.time1sGust = (int(''.join(self.binStringList[self.time1sGustStart: self.time1sGustStart + self.time1sGustLen]), 2) * self.time1sGustRes)
         self.alarmSent = int(''.join(self.binStringList[self.alarmSentStart: self.alarmSentStart + self.alarmSentLen]), 2)
         self.dbg = int(''.join(self.binStringList[self.dbgStart: self.dbgStart + self.dbgLen]), 2)
+        
+        print (type(self.hzAvg))
+        
+        if self.hzAvg:
+            self.wind_speed_avg =  ( -0.00065 * (self.hzAvg *self.hzAvg ) + ( 0.675 * self.hzAvg) + 0.2 )
+        
+        else:
+            self.wind_speed_avg = 0
+
+        if self.hz3sGust:
+            self.wind_gust3s =  ( -0.00065 * (self.hz3sGust * self.hz3sGust ) + ( 0.675 * self.hz3sGust) + 0.2 )
+        
+        else:
+            self.wind_gust3s = 0
+
+        if self.hz1sGust:
+            self.wind_gust1s =  ( -0.00065 * (self.hz1sGust * self.hz1sGust ) + ( 0.675 * self.hz1sGust) + 0.2 )
+        
+        else:
+            self.wind_gust1s = 0
+            
+        if self.hz3sMin:
+            self.wind_min3s =  ( -0.00065 * (self.hz3sMin * self.hz1sGust ) + ( 0.675 * self.hz3min) + 0.2 )
+        
+        else:
+            self.wind_min3s = 0
 
         if enablePrint == 1:
             print("Index: " + str(self.index))
@@ -123,10 +149,25 @@ class parser:
             else:
                 print("Batt: -- ")
 
-            print("Hz_avg: " + str(format(self.hzAvg, '.2f')) + "Hz")
-            print("Hz_3s_gust: " + str(format(self.hz3sGust, '.2f')) + "Hz")
-            print("Hz_1s_gust: " + str(format(self.hz1sGust, '.2f')) + "Hz")
-            print("Hz_3s_min: " + str(format(self.hz3sMin, '.2f')) + "Hz")
+            print("RAW Hz DATA:")
+            print("Hz_avg       : " + str(format(self.hzAvg, '.2f')) + "Hz")
+            print("Hz_3s_gust   : " + str(format(self.hz3sGust, '.2f')) + "Hz")
+            print("Hz_1s_gust   : " + str(format(self.hz1sGust, '.2f')) + "Hz")
+            print("Hz_3s_min    : " + str(format(self.hz3sMin, '.2f')) + "Hz")
+            print("Hz_1s_stdev  : " + str(format(self.hz1StdDev, '.2f')) + "Hz")
+            print("Deg_1s_avg   : " + str(format(self.deg1sAvg, '.2f')) + "deg")
+            print("Deg_1s_gust  : " + str(format(self.deg1sGust, '.2f')) + "deg")
+            print("Deg_1s_stdev : " + str(format(self.deg1sStdDev, '.2f')) + "deg")
+            print("Deg_ccw_min  : " + str(format(self.degCcwMin, '.2f')) + "deg")
+            print("Deg_cw_max   : " + str(format(self.degCwMax, '.2f')) + "deg")
+            print("Time_1s_gust : " + str(format(self.time1sGust, '.2f')) + "deg")
+            print("\r\n")
+
+            print("DECODED m/s DATA:")
+            print("Wind_speed_avg_ms: " + str(format(self.wind_speed_avg, '.2f')) + "m/s")
+            print("Hz_3s_gust_ms: " + str(format(self.wind_gust3s, '.2f')) + "m/s")
+            print("Hz_1s_gust_ms: " + str(format(self.wind_gust1s, '.2f')) + "m/s")
+            print("Hz_3s_min_ms: " + str(format(self.wind_min3s, '.2f')) + "m/s")
             print("Hz_1s_stdev: " + str(format(self.hz1StdDev, '.2f')) + "Hz")
             print("Deg_1s_avg: " + str(format(self.deg1sAvg, '.2f')) + "deg")
             print("Deg_1s_gust: " + str(format(self.deg1sGust, '.2f')) + "deg")
@@ -134,6 +175,7 @@ class parser:
             print("Deg_ccw_min: " + str(format(self.degCcwMin, '.2f')) + "deg")
             print("Deg_cw_max: " + str(format(self.degCwMax, '.2f')) + "deg")
             print("Time_1s_gust: " + str(format(self.time1sGust, '.2f')) + "deg")
+
 
             if self.alarmSent == 1:
                 print("Alarm sent!")
@@ -147,11 +189,11 @@ class parser:
 
 ##### EXAMPLE CODE #####
 
-# print("MeteoWind parser example code")                                                                               # uncomment if you want to run it from IDE
+# print("MeteoWind parser example code")            # uncomment if you want to run it from IDE
 # d = parser("9f03e8080c2e0a00b4005a2d0000",14)
 # d.parsePayload(1)
 
-if __name__ == "__main__":                                                                                              # uncomment if you want to run it from CMD line
+if __name__ == "__main__":                              # uncomment if you want to run it from CMD line
     print("MeteoWind IoT Pro Gen2 parser example code")
     bytesToDecode = 14
     d = parser(str(sys.argv[1]), bytesToDecode)
