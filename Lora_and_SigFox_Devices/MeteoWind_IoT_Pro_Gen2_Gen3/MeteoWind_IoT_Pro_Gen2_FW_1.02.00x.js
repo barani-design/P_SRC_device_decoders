@@ -83,7 +83,7 @@ function decodeUplink(input) {
     var hz_1sgust = hz_3sgust + precisionRound(bitShift(8)*0.1, 2);
     var wind_1sgust = hz_1sgust > 0 ? precisionRound( ( -c2*(hz_1sgust * hz_1sgust ) ) + (c1 * hz_1sgust) + 0.2, 2) : 0;
 
-    var hz_3min = precisionRound(bitShift(9)*0.1, 2);
+    var hz_3smin = precisionRound(bitShift(9)*0.1, 2);
     var wind_3smin = hz_3min > 0 ? precisionRound(-c2*(hz_3smin * hz_3smin ) + (c1 * hz_3smin) + 0.2, 2) : 0;
 
     var hz_stdev = precisionRound(bitShift(8)*0.1, 2);
